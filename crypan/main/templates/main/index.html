@@ -9,5 +9,9 @@
 <body>
    <h1>Its CryPanel!</h1>
    <h3>your nickname: {{user.username}}</h3>
+<form action="{% url 'quit' %}" method="POST">
+    {% csrf_token %}
+<button type="submit">quit in account</button> 
+</form>
 </body>
 </html>
