@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="table-container bg-dark mt-5 mb-2 rounded container " style="height: auto;min-height: 200px;"> 
+    <table class="table text-light table-hover table-striped rounded">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">NAME</th>
+                <th scope="col">NAMESERVERS</th>
+                <th scope="col">STATUS</th>
+                <th scope="col">DATE</th>
+                <th scope="col">
+                    <span data-bs-toggle="tooltip" title="Add domain" >
+                        <button class="text-white" data-bs-toggle="modal" data-bs-target="#addDomain" style="border: none;outline:none;background:none;color:white;">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-plus" viewBox="0 0 16 16">
+                                <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
+                            </svg>
+                        </button>
+                    </span>
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in domains %}
+                <tr id="{{item.id}}">
+                    <td scope="col" class="text-light">{{item.id}}</td>
+                    <td class="text-light">{{item.name}}</td>
+                    <td class="text-light">{{item.ns1}} <br> {{item.ns2}}</td>
+                    <td class="text-light">{{item.status}}</td>
+                    <td class="text-light">{{item.created_at}}</td>
+                    <td>
+                        <button data-bs-toggle="tooltip" title="Delete domain"  type="button" class="btn btn-danger text-white deleteDomain" >
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash-fill" viewBox="0 0 16 16">
+                                <path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z"/>
+                              </svg>                                
+                        </button>
+                        
+                        {% if item.status == 'Waiting for connection' %}
+                        <button data-bs-toggle="tooltip" title="Check connect"  type="button" class="btn btn-primary text-white checkConnect" >
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-clockwise" viewBox="0 0 16 16">
+                                <path fill-rule="evenodd" d="M8 3a5 5 0 1 0 4.546 2.914.5.5 0 0 1 .908-.417A6 6 0 1 1 8 2v1z"/>
+                                <path d="M8 4.466V.534a.25.25 0 0 1 .41-.192l2.36 1.966c.12.1.12.284 0 .384L8.41 4.658A.25.25 0 0 1 8 4.466z"/>
+                              </svg>                         
+                        </button>
+                        {% endif %}
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+<div class="modal fade " id="addDomain" tabindex="-1">
+    <div class="modal-dialog">
+      <div class="modal-content bg-dark text-white">
+        <div class="modal-header">
+          <h5 class="modal-title">Add domain</h5>
+          <button type="button" class="btn-close text-white" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <input id="domain" type="text" class="form-control" placeholder="domain.com">
+        </div>
+        <div class="modal-footer">
+          <button type="button" id="submitAddDomain" class="w-100 btn btn-primary">Submit</button>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}

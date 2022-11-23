@@ -1,0 +1,15 @@
+
+.table-container {
+    width: 100%;
+    overflow: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+.btn-close{
+    -webkit-filter: invert(100%); /* Safari/Chrome */
+    filter: invert(100%);
+}
+
+.hoverCard:hover{
+    background-color: RGBA(13,110,253,var(--bs-bg-opacity,1))!important;
+}

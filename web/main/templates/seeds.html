@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="table-container bg-dark mt-5 mb-2 rounded container " style="height: auto;min-height: 200px;"> 
+    <table class="table text-light table-hover table-striped rounded">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">IP</th>
+                <th scope="col">ERC20 TOKIEN</th>
+                <th scope="col">ETH SUM</th>
+                <th scope="col">HAS BEEN DRAINED</th>
+                <th scope="col">DATE</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in seeds %}
+                <tr id="{{item.id}}">
+                    <td scope="col" class="text-light">{{item.id}}</td>
+                    <td class="text-light">{{ item.ip }}</td>
+                    <td class="text-light">{{ item.erc20_token }}</td>
+                    <td class="text-light">{{ item.eth_sum }}</td>
+                    <td class="text-light">{{ item.has_been_drained }}</td>
+                    <td class="text-light">{{ item.created_at }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

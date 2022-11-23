@@ -1,0 +1,114 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="mobile-flex mx-auto flex-row d-flex  mt-5 gap-4 w-75 justify-content-center">
+        <div class="p-4 bg-dark w-50 text-white rounded" style="height: auto;">
+            Statistic
+            <div class="list-group mb-3 mt-2 ">
+                <a class="list-group-item list-group-item-action list-group-item-dark">Profits: {{ profitsCount }}</a>
+                <a class="list-group-item list-group-item-action list-group-item-dark">Logs: {{ logsCount }}</a>
+            </div>
+
+            Withdraws
+            <div class="table-container bg-secondary mt-2 mb-2 rounded" style="height: 200px;"> 
+                <table class="table table-primary table-hover table-striped">
+                    <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">SUM</th>
+                            <th scope="col">STATUS</th>
+                            <th scope="col">COIN</th>
+                            <th scope="col">DATE</th>
+                            <th scope="col">
+                                <span data-bs-toggle="tooltip" title="Send withdraw request">
+                                    <button class="text-dark" data-bs-toggle="modal" data-bs-target="#withdrawRequest" style="border: none;outline:none;background:none;color:white;">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-plus" viewBox="0 0 16 16">
+                                            <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
+                                        </svg>
+                                    </button>
+                                </span>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for item in withdraws %}
+                            <tr>
+                                <td scope="col">{{item.id}}</td>
+                                <td>{{item.sum}}</td>
+                                <td>{{item.status}}</td>
+                                <td>{{item.coin}}</td>
+                                <td>{{item.created_at}}</td>
+                                <td></td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+
+            <p class="mt-4 mb-1">Profits</p> 
+            <div class="table-container bg-secondary  mb-2 rounded" style="height: 200px;">
+                <table class="table table-primary table-hover table-striped">
+                    <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">SUM</th>
+                            <th scope="col">COIN</th>
+                            <th scope="col">DATE</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for item in profits %}
+                            <tr>
+                                <td scope="col">{{item.id}}</td>
+                                <td>{{item.sum}}</td>
+                                <td>{{item.coin}}</td>
+                                <td>{{item.created_at}}</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="w-25 bg-dark text-white p-4 rounded" style="margin-bottom: auto;">
+            Balance
+            <div class="list-group mb-3">
+                <a class="list-group-item list-group-item-action list-group-item-dark">BTC balance: {{ wallet.btcBalance }}</a>
+                <a class="list-group-item list-group-item-action list-group-item-dark">ETH balance: {{ wallet.ethBalance }}</a>
+                <a class="list-group-item list-group-item-action list-group-item-dark">XMR balance: {{ wallet.xmrBalance }}</a>
+            </div>
+
+            <p class="mb-0 mt-4">Wallets address</p> 
+            <input type="text" class="form-control" id="walletBtc" value="{{ wallet.btc }}" placeholder="BTC address">
+            <input type="text" class="form-control mt-2" id="walletEth" value="{{ wallet.eth }}" placeholder="ETH address">
+            <input type="text" class="form-control mt-2" id="walletXmr" value="{{ wallet.xmr }}" placeholder="XMR address">
+            <button class="btn btn-success container-fluid mt-2" id="saveWallets">Save</button>
+        </div>
+    </div>
+
+
+    <div class="modal fade " id="withdrawRequest" tabindex="-1">
+        <div class="modal-dialog">
+          <div class="modal-content bg-dark text-white">
+            <div class="modal-header">
+              <h5 class="modal-title">Send withdraw request</h5>
+              <button type="button" class="btn-close text-white" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="input-group mb-3">
+                    <input type="number" id="sum" class="form-control" placeholder="Sum">
+                    <select class="form-select" id="coin">
+                        <option value="BTC">BTC</option>
+                        <option value="ETH">ETH</option>
+                        <option value="XMR">XMR</option>
+                    </select>
+                </div>
+    
+            </div>
+            <div class="modal-footer">
+              <button type="button" id="submitRequestWithdraw" class="w-100 btn btn-primary">Submit</button>
+            </div>
+          </div>
+        </div>
+      </div>
+{% endblock %}

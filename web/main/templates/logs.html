@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="table-container bg-dark mt-5 mb-2 rounded container " style="height: auto;min-height: 200px;"> 
+    <table class="table text-light table-hover table-striped rounded">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">IP</th>
+                <th scope="col">ADDRESS ETH</th>
+                <th scope="col">TOKENS ERC20</th>
+                <th scope="col">TOKENS ERC1155</th>
+                <th scope="col">TOKENS ERC721</th>
+                <th scope="col">SUM ETH</th>
+                <th scope="col">DATE</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in logs %}
+                <tr id="{{item.id}}">
+                    <td scope="col" class="text-light">{{item.id}}</td>
+                    <td class="text-light">{{ item.address }}</td>
+                    <td class="text-light">{{ item.erc20 }}</td>
+                    <td class="text-light">{{ item.erc1155 }}</td>
+                    <td class="text-light">{{ item.erc721 }}</td>
+                    <td class="text-light">{{ item.sumEth }}</td>
+                    <td class="text-light">{{ item.created_at }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+<div class="modal fade " id="addDomain" tabindex="-1">
+    <div class="modal-dialog">
+      <div class="modal-content bg-dark text-white">
+        <div class="modal-header">
+          <h5 class="modal-title">Add domain</h5>
+          <button type="button" class="btn-close text-white" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <input id="domain" type="text" class="form-control" placeholder="domain.com">
+        </div>
+        <div class="modal-footer">
+          <button type="button" id="submitAddDomain" class="w-100 btn btn-primary">Submit</button>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}

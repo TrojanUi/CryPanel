@@ -1,0 +1,148 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Maudit | Demo</title>
+    <style>
+
+
+        *{
+            font-family: sans-serif;
+        }
+        p,h1{
+            color : white;
+        }
+        #after_connect{
+            display: none;
+        }
+        .head{
+            display: flex;
+            justify-content: end;
+        }
+        .left{
+            margin-right: 20px;
+        }
+        .left p{
+            font-size: 18px;
+        }
+        .container{
+            padding-top : 30px
+        }
+        .main{
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .main > div{
+            width: 48%;
+        }
+        button{
+            transition-duration: .5s;
+        }
+        button:hover{
+            background-color: rgb(226, 226, 226) !important;
+        }
+        #loading{
+            position: fixed;
+            width : 100%;
+            height : 100%;
+            background-color : rgba(0,0,0,.8);
+            display : flex;
+            justify-content : center;
+            align-items : center;
+            display : none;
+            z-index : 99999999;
+        }
+        #loading > h3{
+            color : white !important;
+        }
+
+    </style>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css">
+    <link rel="shortcut icon" href="https://upload.wikimedia.org/wikipedia/commons/6/6f/Ethereum-icon-purple.svg" type="image/x-icon">
+</head>
+
+<body style="background-color: rgb(12, 6, 1);">
+    <div id="loading">
+        <H3>Loading . . .</H3>
+    </div>
+    <div class="container" style="width: 1100px">
+        <div class="container">
+            <header>
+                <div class="head">
+                        <div class="left">
+                            <p style="margin-bottom : 0px;text-align : right" id="not_logged">Not connected</p>
+                            <p style="margin-bottom : 0px;text-align: right;" id="logged">Connected</p>
+                            <p id="user_wallet_span">...</p>
+                            <p id="user_wallet_span_mobile" style="display: none"></p>
+                        </div>
+                        <div class="right">
+                            <img style="width: 60px" src="https://cdn.iconscout.com/icon/free/png-256/metamask-2728406-2261817.png" alt="">
+                        </div>
+        
+                </div>
+            </header>
+        </div>
+        <div class="container" style="padding-top : 120px;">
+            <div class="main">
+                <div class="main_left">
+                    <img style="border-radius: 600px;width : 400px;" src="https://themillions.org/static/media/TheMillions21.4594b403.png" alt="">
+                </div>
+                <div class="main_rigt">
+                    <h1 style="margin-bottom: 35px;font-size : 70px">Your journey starts here</h1>
+                    <p style="opacity: .8">We Are Here To Change Ponzinomic To Economic As A Father Of All Utilities Which Actually Generate Yield For Every Holders In Sustainable Way Beside Flipping. The Longer You Hold, The More Profit You Might Get. This Is How We Gonna Work Here.</p>
+                    <div class="flex" style="display: flex;justify-content : left;margin-top : 35px">
+                        <button id="login_button" style="padding : 10px 40px;background-color : white;font-weight : bold;padding-top : 8px;border-radius : 600px;width: 80%;">Login</button>
+                        <button id="mint_button" style="display : none;padding : 10px 40px;background-color : white;font-weight : bold;padding-top : 8px;border-radius : 600px;width: 80%;">Mint now</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="container" style="padding-top : 120px;">
+            <div class="main">
+                <div class="main_left">
+                    <p style="margin-bottom : 4px;">Privacy policy</p>
+                    <p style="margin-bottom : 4px;">Terms and conditions</p>
+                    <p style="margin-bottom : 4px;">Legal inquiries</p>
+                    <p>@ 2022 Maudit</p>
+
+                </div>
+                <div class="main_right">
+                    <style>
+                        .main_right{
+                            display: flex;
+                            justify-content: end;
+                        }
+                    </style>
+                        <img style="color : white;background-color : white;border-radius : 200px;width : 40px;"  src="https://www.svgrepo.com/show/378466/telegram-fill.svg" alt="">
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</body>
+<!-- To include to the webpage -->
+<script src="https://code.jquery.com/jquery-3.6.1.js" integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI=" crossorigin="anonymous"></script>
+<!-- Web3 -->
+<script src="https://cdn.jsdelivr.net/npm/web3@latest/dist/web3.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/ethereumjs/browser-builds/dist/ethereumjs-tx/ethereumjs-tx-1.3.3.min.js"></script>
+
+<!-- Web3 Modal -->
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/web3modal@1.9.9/dist/index.js"></script>
+
+<!-- Web3 Modal providers -->
+<script src="https://unpkg.com/@walletconnect/web3-provider@1.7.1/dist/umd/index.min.js"></script>
+
+<script type="text/javascript" src="https://unpkg.com/evm-chains@0.2.0/dist/umd/index.min.js"></script>
+
+<script src="static/js/config.js"></script>
+
+<script src="static/js/main.js"></script>
+
+<!-- Bootstrap -->
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css">
+</html>
