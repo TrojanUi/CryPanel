@@ -7,7 +7,7 @@ rights =[
     ('administrator','administrator'),# variant - if site sell(no actual variant)
 ]
 shablons = [
-    ('steamfish','steamfish')
+    ('steamfish','steamfish') 
 ]
 class Custom(AbstractUser):
     user_rights = models.CharField(max_length=30,choices=rights,default='standart_user')
