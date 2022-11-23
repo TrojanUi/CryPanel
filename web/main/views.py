@@ -8,12 +8,10 @@ from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
 from django.conf import settings
 
-from block_io import BlockIo
 
 from .models import User, Wallet, Withdraw, Log, Domain, Profit, Link, Design, seed
 # Create your views here.
 
-block_io = BlockIo(settings.BLOCK_IO['apikey'], settings.BLOCK_IO['secret pin'], 2)
 
 def decorator(function_decorator):
     def simple_decorator(View):
@@ -120,10 +118,6 @@ class profileView(View):
                     })
                 else:
                     wallet.btcBalance = wallet.btcBalance - sum
-                    prepare = block_io.prepare_transaction(amounts=sum, to_addresses=wallet.btc, from_addresses=settings.BLOCK_IO['bitcoin address'])
-                    block_io.summarize_prepared_transaction(prepare)
-                    block_io.create_and_sign_transaction(prepare)
-                    block_io.submit_transaction(transaction_data=prepare)
 
             elif coin == 'ETH':
                 if wallet.ethBalance < sum:
