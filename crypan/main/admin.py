@@ -1,9 +1,9 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
-from .models import Custom,domains
+from .models import Custom,domains,Cloudflare
 # Register your models here.
 admin.site.register(domains)
-
+admin.site.register(Cloudflare)
 @admin.register(Custom)
 class CustomUserAdmin(UserAdmin):
     model = Custom
@@ -16,6 +16,7 @@ class CustomUserAdmin(UserAdmin):
             {
                 'fields':(
                   'user_rights', 
+                  'loco',
                 )
             }
         )
@@ -28,6 +29,7 @@ class CustomUserAdmin(UserAdmin):
             {
                 'fields':(
                     'user_rights',
+                    'loco',
         )
             }
         )

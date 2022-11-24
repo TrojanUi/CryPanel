@@ -9,6 +9,7 @@
 <body>
    <h1>Its CryPanel!</h1>
    <h3>your nickname: {{user.username}}</h3>
+   <a href="{% url 'add_domains' %}">Go to add site</a>
 <form action="{% url 'quit' %}" method="POST">
     {% csrf_token %}
 <button type="submit">quit in account</button> 
