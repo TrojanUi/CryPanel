@@ -1,8 +1,10 @@
 from django.urls import path
 from . import views
 urlpatterns = [
-path('',views.index,name='index'),#testpage
-path('login',views.login,name='login'),
-path('quit',views.quit,name='quit'),
-path('domains',views.add_domains,name='add_domains')
+    path('', views.indexView.as_view(), name='index'),
+    path('main', views.indexView.as_view(), name='main'),
+    path('login', views.loginView.as_view() ,name='login'),
+    path('logout', views.logoutView.as_view(), name='logout'),
+    path('domains', views.domainsView.as_view(), name='domains'),
+    path('links', views.linksView.as_view(), name='links'),
 ]

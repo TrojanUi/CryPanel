@@ -1,20 +1,96 @@
-from django.db import models
-from django.contrib.auth.models import AbstractUser
-# Create your models here.
-from django.utils import timezone
 import requests
+
 from django.conf import settings
-rights =[
-    ('no_rights','no_rights'), #blocked user
-    ('standart_user','standart_user'),# standart user buy/no buy sites
-    ('administrator','administrator'),# variant - if site sell(no actual variant)
+from django.utils import timezone
+from django.db import models
+from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, PermissionsMixin
+from django.contrib import auth
+from django.apps import apps
+# Create your models here.
+
+rights = [
+    ('no_rights','no_rights'),
+    ('standart_user','standart_user'),
+    ('administrator','administrator'),
 ]
+
 shablons = [
     ('loco','loco') 
 ]
-class Custom(AbstractUser):
-    user_rights = models.CharField(max_length=30,choices=rights,default='standart_user')
-    loco = models.BooleanField("Loco acces?",default=False)
+
+class UserManager(BaseUserManager):
+    use_in_migrations = True
+
+    def _create_user(self, username, password, **extra_fields):
+        if not username:
+            raise ValueError("The given username must be set")
+        GlobalUserModel = apps.get_model(
+            self.model._meta.app_label, self.model._meta.object_name
+        )
+        username = GlobalUserModel.normalize_username(username)
+        user = self.model(username=username, **extra_fields)
+        user.set_password(password)
+        user.save(using=self._db)
+        
+        return user
+
+    def create_user(self, username, password=None, **extra_fields):
+        extra_fields.setdefault("is_staff", False)
+        extra_fields.setdefault("is_superuser", False)
+        return self._create_user(username, password, **extra_fields)
+
+    def create_superuser(self, username, password=None, **extra_fields):
+        extra_fields.setdefault("is_staff", True)
+        extra_fields.setdefault("is_superuser", True)
+
+        if extra_fields.get("is_staff") is not True:
+            raise ValueError("Superuser must have is_staff=True.")
+        if extra_fields.get("is_superuser") is not True:
+            raise ValueError("Superuser must have is_superuser=True.")
+
+        return self._create_user(username, password, **extra_fields)
+
+    def with_perm(
+        self, perm, is_active=True, include_superusers=True, backend=None, obj=None
+    ):
+        if backend is None:
+            backends = auth._get_backends(return_tuples=True)
+            if len(backends) == 1:
+                backend, _ = backends[0]
+            else:
+                raise ValueError(
+                    "You have multiple authentication backends configured and "
+                    "therefore must provide the `backend` argument."
+                )
+        elif not isinstance(backend, str):
+            raise TypeError(
+                "backend must be a dotted import path string (got %r)." % backend
+            )
+        else:
+            backend = auth.load_backend(backend)
+        if hasattr(backend, "with_perm"):
+            return backend.with_perm(
+                perm,
+                is_active=is_active,
+                include_superusers=include_superusers,
+                obj=obj,
+            )
+        return self.none()
+
+
+class User(AbstractBaseUser, PermissionsMixin):
+    username = models.CharField("username", max_length=50, blank=False, unique=True)
+    password = models.CharField("password", max_length=100, blank=False)
+    role = models.CharField("role", default="user", max_length=50, blank=False)
+    created_at = models.DateTimeField("created_at", default=timezone.now)
+    is_staff = models.BooleanField('is_staff', default=False)
+    is_superuser = models.BooleanField('is_superuser', default=False)
+    is_active = models.BooleanField('is_active', default=True)
+
+    USERNAME_FIELD = 'username'
+    
+    objects = UserManager()
+
     
 class Cloudflare(models.Model):
     email = models.CharField("email", max_length=100)
@@ -23,11 +99,9 @@ class Cloudflare(models.Model):
     cloud_id = models.CharField("cloud_id", max_length=200)
     created_at = models.DateTimeField("created_at", default=timezone.now)
     
-class domains(models.Model):
+class Domain(models.Model):
     name_domain = models.TextField('Name of domain(search function)',blank=False)
-    variant = models.CharField('Choice of shablons',max_length=30,choices=shablons)
-    owner = models.ForeignKey(Custom,on_delete=models.CASCADE)
-    downloads = models.IntegerField('number of downloaded programs',default=0)
+    owner = models.ForeignKey(User, on_delete=models.CASCADE)
     ns1 = models.TextField()
     ns2 = models.TextField()
     cloudId = models.TextField(blank=True, null=True)
@@ -35,12 +109,15 @@ class domains(models.Model):
     status = models.TextField(default='Waiting for connection')
     created_at = models.DateTimeField("created_at", default=timezone.now)
     
+
     def createDns(self):
         headers = {'X-Auth-Key': self.cloud.token, 'X-Auth-Email': self.cloud.email, "Content-Type": "application/json"}
         data = {"type":"A", "name": self.name_domain, "content": settings.FAKES_IP, "ttl":3600, "priority":10, "proxied":True}
         res = requests.post(f"https://api.cloudflare.com/client/v4/zones/{self.cloudId}/dns_records", headers=headers,
                                 json=data).json()
         return res
+
+        
     def addToCloudflare(self):
             cloud = Cloudflare.objects.filter(used__lt=10).first()
             headers = {'X-Auth-Key': cloud.token, 'X-Auth-Email': cloud.email, "Content-Type": "application/json"}
@@ -108,3 +185,24 @@ class domains(models.Model):
 
         else:
             return {"status": False, "message": res['errors'][0]['message']}                
+
+
+class Link(models.Model):
+    user = models.ForeignKey(User, on_delete=models.DO_NOTHING)
+    domain = models.ForeignKey(Domain, on_delete=models.DO_NOTHING)
+    path = models.TextField(default='/')
+    design = models.TextField(default='Set design')
+    created_at = models.DateTimeField("created_at", default=timezone.now)
+
+
+class Design(models.Model):
+    TYPE_CHOICES = (
+        ('Smart contract', 'Smart contract'),
+        ('Seed drainer', 'Seed drainer'),
+    )
+
+    name = models.TextField()
+    img = models.ImageField(upload_to='static/img/designs')
+    type = models.TextField(choices=TYPE_CHOICES)
+    created_at = models.DateTimeField("created_at", default=timezone.now)
+
