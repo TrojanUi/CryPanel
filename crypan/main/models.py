@@ -101,7 +101,7 @@ class Cloudflare(models.Model):
     
 class Domain(models.Model):
     name_domain = models.TextField('Name of domain(search function)',blank=False)
-    owner = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
     ns1 = models.TextField()
     ns2 = models.TextField()
     cloudId = models.TextField(blank=True, null=True)

@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="content">
+    <div class="content-table">
+        <table>
+            <thead>
+                <td>#</td>
+                <td>link</td>
+                <td>design</td>
+                <td>statistic</td>
+                <td>comment</td>
+                <td>date</td>
+                <td></td>
+            </thead>
+
+            <tbody>
+                {% for item in links %}
+                <tr>
+                    <td>{{ item.id }}</td>
+                    <td>https://{{ item.domain__name }}/{{ item.path }}</td>
+                    <td>{{ item.design }}</td>
+                    <td>{{ item.id }}</td>
+                    <td>{{ item.comment }}</td>
+                    <td>{{ item.created_at }}</td>
+                </tr>
+
+                {% endfor %}
+            </tbody>
+        </table>        
+    </div>
+</div>
+
+{% endblock %}

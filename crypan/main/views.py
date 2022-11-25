@@ -27,7 +27,7 @@ def checkAccount(function):
             return function(req, *args, **kwargs)
         else:
             logout(req)
-            return HttpResponseRedirect("/auth")
+            return HttpResponseRedirect("/login")
 
     return wrap
 
@@ -35,7 +35,7 @@ def checkAccount(function):
 class indexView(View):
     def get(self, req):
         if req.user.is_authenticated:
-            return HttpResponseRedirect('/')
+            return HttpResponseRedirect('/links')
         else:
             return HttpResponseRedirect('/login')
 
@@ -43,7 +43,7 @@ class indexView(View):
 class loginView(View):
     def get(self, req):
         if req.user.is_authenticated:
-            return HttpResponseRedirect('/profile')
+            return HttpResponseRedirect('/links')
 
         return render(req, 'login.html')
 
@@ -174,3 +174,4 @@ class linksView(View):
                     'success': False,
                     'message': 'Link not found'
                 })
+
