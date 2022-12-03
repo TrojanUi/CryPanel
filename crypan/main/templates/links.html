@@ -6,24 +6,40 @@
     <div class="content-table">
         <table>
             <thead>
-                <td>#</td>
-                <td>link</td>
-                <td>design</td>
-                <td>statistic</td>
-                <td>comment</td>
-                <td>date</td>
-                <td></td>
+                <td>
+                    <span>ID</span>
+                </td>
+                <td>
+                    <span>Ссылка</span>
+                </td>
+                <td>
+                    <span>Дизайн</span>
+                </td>
+                <td>
+                    <span>Статистика</span>
+                </td>
+                <td>
+                    <span>Коментарий</span>
+                </td>
+                <td>
+                    <span>Дата создания</span>
+                </td>
+                <td>
+                    <button class="table-button" data-bs-toggle="modal" data-bs-target="#addLink">
+                        <i class="fa-solid fa-plus"></i>
+                    </button>
+                </td>
             </thead>
 
             <tbody>
                 {% for item in links %}
-                <tr>
+                <tr id="{{ item.id }}">
                     <td>{{ item.id }}</td>
                     <td>https://{{ item.domain__name }}/{{ item.path }}</td>
                     <td>{{ item.design }}</td>
                     <td>{{ item.id }}</td>
                     <td>{{ item.comment }}</td>
-                    <td>{{ item.created_at }}</td>
+                    <td>{{ item.created_at|date:"Y.m.d g:i" }}</td>
                 </tr>
 
                 {% endfor %}
@@ -32,4 +48,51 @@
     </div>
 </div>
 
+
+<div class="modal fade" id="addLink" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Добавление ссылки</h5>
+          <button type="button" class="modal-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <div class="input-block">
+                <span class="input-label">Введите данные для того что-бы создать ссылку</span>
+                <div class="input-group mb-3">
+                    <span class="input-group-text">https://</span>
+                    <input id="domain" type="text" class="form-control" placeholder="example.com">
+                    <span class="input-group-text">/</span>
+                    <input id="link" type="text" class="form-control" placeholder="promo">
+                </div>
+            </div>
+
+            <div class="modal-line"></div>
+
+            <div class="input-block">
+                <span class="input-label">Переадресация после скачивания</span>
+                <input id="redirect" type="text" class="form-control" placeholder="https://google.com (Необязательное поле)">
+            </div>
+
+            <div class="input-block">
+                <span class="input-label">Дизайн</span>
+                <select class="form-select" id="selectDesign">
+                    {% for item in designs %}
+                    <option value="{{ item.id }}">{{ item.name }}</option>
+                    {% endfor %}
+                </select>
+                
+                <div class="designs">
+                    {% for item in designs %}
+                    <img class="design-img" id="{{ item.id }}" src="/{{ item.img }}">
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+          <button id="addLink" type="button" class="modal-button">Продолжить</button>
+        </div>
+      </div>
+    </div>
+</div>
 {% endblock %}

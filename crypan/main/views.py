@@ -85,6 +85,7 @@ class domainsView(View):
 
     def post(self, req):
         data = req.POST
+
         if data['do'] == 'addDomain':
             if Domain.objects.filter(name=data['name']).first():
                 return JsonResponse({
@@ -92,9 +93,16 @@ class domainsView(View):
                     'message': 'Domain is busy'
                 })
             else:
-                newDomain = Domain(name=data['name'], user=req.user)
+                name = data['podDomain'] + '.' + data['name'] if data['podDomain'] != '' else data['name']
+                newDomain = Domain(name=name, user=req.user)
                 newDomain.save()
                 result = newDomain.addToCloudflare()
+                if result is False:
+                    newDomain.delete()
+                    return JsonResponse({
+                        'success': False,
+                        'message': 'Нету cloudflare аккаунтов'
+                    })
                 return JsonResponse(result)
         elif data['do'] == 'deleteDomain':
             domain = Domain.objects.filter(user=req.user, id=data['id']).first()
