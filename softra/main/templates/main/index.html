@@ -1,0 +1,54 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LOCO</title>
+    <link rel="stylesheet" href="{% static 'src/style.css' %}">
+</head>
+<body>
+    <div class="container">
+    <div class="navbar">
+        <div class="logo">LOCO</div>
+        <div class="menu">
+            <div class="menu_item">Main</div>
+            <div class="menu_item">Vault</div>
+            <div class="menu_item">Protection</div>
+            <div class="menu_item">Advantages</div>
+            <div class="menu_item">Reviews</div>
+        </div>
+    </div>
+    <div class="download_block">
+        <img href="{{todo.img|safe}}" class="download_block_image">
+        <div class="download_block_information">
+            <div class="download_block_name">{{todo.name}}</div>
+            <div class="download_block_formation">{{todo.typical}}</div>
+            <div class="download_block_zvezdi"><img src="{% static 'src/2.svg' %}" alt=""><img src="{% static 'src/2.svg' %}" alt=""><img src="{% static 'src/2.svg' %}" alt=""><img src="{% static 'src/2.svg' %}" alt=""><img src="{% static 'src/2.svg' %}" alt=""> ({{todo.kolvo_download}})</div>
+        </div>
+        <button class='download_block_btn' onclick="location.href = '{{todo.linkToDownload}}'">Download</button>
+    </div>
+<div class="information_for_user" style="margin-top:25px;">
+    <div class="download_block" style="width: 225px;margin-right:0px;margin-top:0px;display:block;">
+        <div class="d_flex"><img src="{% static 'src/3.svg' %}" class='trhee' alt=""><div class="checking">Checking with <br>VirusTotal</div></div>
+        <div class="very_good_info">All files that are added are immediately checked for viruses. If you are here, it means there are no viruses.</div>
+    </div>
+    <div class="download_block" style="width:435px;margin-left:15px;margin-top:0px;display:block;">
+        <div class="inform_for_file">File size: {{todo.massa}}</div>
+        <div class="inform_for_file">Uploaded: {{todo.created}}</div>
+        <div class="inform_for_file">Name: {{todo.name}}</div>
+        <div class="d_flex" style="margin-top:5px;"><img src="{% static 'src/4.svg' %} " alt=""><div class="inform_for_file"style="margin-top:0px;"> File verified</div></div>
+        <div class="download_block_zvezdi" style="margin-top:7px;"><img src="{% static 'src/2.svg' %}" alt=""><img src="{% static 'src/2.svg' %}" alt=""><img src="{% static 'src/2.svg' %}" alt=""><img src="{% static 'src/2.svg' %}" alt=""><img src="{% static 'src/2.svg' %}" alt=""> ({{todo.kolvo_download}})</div>
+    </div>
+</div>
+<div class="block_to_info">
+    <div class="blocks"><img src="{% static 'src/5.png' %}" class='blocks_image' alt=""><div class="blocks_title">Privacy</div><div class="blocks_information">We're built to provide true privacy by properly applying end-to-end encryption.</div></div>
+    <div class="blocks"><img src="{% static 'src/6.png' %}" class='blocks_image' alt=""><div class="blocks_title">Security</div><div class="blocks_information">We are carefully designed to provide the highest level of security for users.</div></div>
+    <div class="blocks"><img src="{% static 'src/7.png' %}" class='blocks_image' alt=""><div class="blocks_title">Transparency</div><div class="blocks_information">The client applications are open. Their cryptographic architecture is detailed.</div></div>
+    <div class="blocks"><img src="{% static 'src/8.png' %}" class='blocks_image' alt=""><div class="blocks_title">Reliability</div><div class="blocks_information">We directly own and manage our redundant server infrastructure.</div></div>
+</div>
+</div>
+<div class="footer"></div>
+</body>
+</html>

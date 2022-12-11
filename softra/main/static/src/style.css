@@ -1,0 +1,175 @@
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600;700;800&display=swap');
+body{
+    margin: 0;
+    background-image: url(1.png);
+    z-index: -1;
+}
+.navbar,.menu,.information_for_user{
+    display: flex;
+}
+.navbar{
+    margin-top: 41px;
+}
+.menu{
+    margin-left: 457px ;
+}
+.container{
+    width: 70%;
+margin: auto auto;
+}
+.logo{
+    font-family: 'Manrope';
+font-style: normal;
+font-weight: 800;
+font-size: 30px;
+line-height: 41px;
+/* identical to box height */
+
+
+color: #2174FE;
+
+}
+.menu_item{
+    font-family: 'Manrope';
+font-style: normal;
+font-weight: 600;
+font-size: 20px;
+line-height: 27px;
+margin-left: 67px;
+color: #474747;
+margin-top: 5px;
+}
+.download_block{
+    background: #2176fe28;
+border-radius: 15px;
+padding: 33px;
+width: 737px;
+margin:102px auto 0 auto;
+display: flex;
+}
+.download_block_image{
+border-radius: 15px;
+width: 80px;
+height: 80px;
+}
+.download_block_zvezdi{
+    display: flex;
+    font-family: 'Manrope';
+font-style: normal;
+font-weight: 600;
+font-size: 15px;
+line-height: 20px;
+
+color: #000000b3;
+}
+.download_block_information{
+    margin-left: 20px;
+}
+.download_block_name{
+    font-family: 'Manrope';
+font-style: normal;
+font-weight: 700;
+font-size: 20px;
+line-height: 27px;
+
+color: #474747;
+}
+.download_block_formation{
+    font-family: 'Manrope';
+font-style: normal;
+font-weight: 600;
+font-size: 15px;
+line-height: 20px;
+color: #474747;
+opacity: 0.65;
+}
+.download_block_btn{
+    cursor: pointer;
+    outline: none;
+    background: #2174FE;
+    border-radius: 15px;
+    font-family: 'Manrope';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 27px;
+    color: #F7F9FB;
+    padding:15px 35px;
+    border:none;
+    margin: auto 0 auto auto;
+    height: 57px;
+}
+.checking{
+    font-family: 'Manrope';
+font-style: normal;
+font-weight: 700;
+font-size: 20px;
+line-height: 25px;
+color: #474747;
+margin-left: 15px;
+}
+.very_good_info{
+    font-family: 'Manrope';
+font-style: normal;
+font-weight: 500;
+font-size: 15px;
+line-height: 20px;
+
+color: #474747;
+margin-top: 17px;
+opacity: 0.65;
+}
+.d_flex{
+    display: flex;
+}
+.inform_for_file{
+    font-family: 'Manrope';
+font-style: normal;
+font-weight: 700;
+font-size: 17px;
+line-height: 126.6%;
+/* identical to box height, or 22px */
+
+
+color: #474747;
+margin-top: 7px;
+}
+.block_to_info{
+    display: flex;
+    margin-top: 130px;
+    justify-content: space-between;
+}
+.blocks{
+    width: 270px;
+    text-align: center;
+}
+.blocks_title{
+    font-family: 'Manrope';
+font-style: normal;
+font-weight: 700;
+font-size: 32px;
+line-height: 44px;
+/* identical to box height */
+
+text-align: center;
+
+color: #000000;
+}
+.blocks_information{
+    font-family: 'Manrope';
+font-style: normal;
+font-weight: 600;
+font-size: 20px;
+line-height: 31px;
+text-align: center;
+
+color: #000000;
+
+opacity: 0.55;
+}
+.footer{
+    width: 100%;
+    height: 80px;
+    margin-top: 150px;
+    background: #2174FE;
+}
