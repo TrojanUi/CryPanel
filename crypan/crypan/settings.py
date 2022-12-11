@@ -13,7 +13,7 @@ SECRET_KEY = 'django-insecure-x5qnc)i-@gb(-il5d@sbtbd&9s3ha4v5_a$16znk3p$r3%bja!
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 FAKES_IP = "159.223.174.144"
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 LOGIN_URL = '/login'
 LOGIN_REDIRECT_URL = '/main'
@@ -27,7 +27,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'main'
+    'main',
+    'fakes'
 ]
 
 MIDDLEWARE = [

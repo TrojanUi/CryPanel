@@ -13,6 +13,9 @@
                     <span>Domain</span>
                 </td>
                 <td>
+                    <span>NS</span>
+                </td>
+                <td>
                     <span>Status</span>
                 </td>
                 <td>
@@ -29,7 +32,8 @@
                 {% for item in domains %}
                 <tr id="{{ item.id }}">
                     <td>{{ item.id }}</td>
-                    <td>{{ item.name }}</td>                    
+                    <td>{{ item.name }}</td> 
+                    <td>{{ item.ns1 }}<br>{{ item.ns2 }}</td>                  
                     <td>{{ item.status }}</td>
                     <td class="date">{{ item.created_at|date:"Y.m.d g:i" }}</td>
                     <td>
