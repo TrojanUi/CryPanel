@@ -1,0 +1,64 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LOCO</title>
+    <link rel="stylesheet" href="{% static 'src/style.css' %}">
+</head>
+<body>
+    <div class="container">
+    <div class="navbar">
+        <div class="logo">LOCO</div>
+        <div class="menu">
+            <div class="menu_item">Main</div>
+            <div class="menu_item">Vault</div>
+            <div class="menu_item">Protection</div>
+            <div class="menu_item">Advantages</div>
+            <div class="menu_item">Reviews</div>
+        </div>
+    </div>
+    <div class="object_1">
+    <div class="tac_title">Secure cloud storage and<br> communication. Built for privacy.</div>
+    <div class="min_tac_title">Create an account and get the opportunity to download<br> your files for free.</div>
+    <button class='reg_btn'>Registration</button>
+</div>
+    <img src="{% static 'src/ilu.png' %}" class='ilus' alt="">
+</div>
+<div class='container_two'>
+    <div class="flex" style='width:100%;'>
+        <div class="left_info">
+            <div id="tag">#vault</div>
+            <div id="left_info_title">Reliable storage and<br> fast transfers</div>
+            <div id="left_info_info">We make secure cloud storage easy and <br> convenient. Sign up today.</div>
+            <button id='left_info_btn'>Registration</button>
+        </div>
+        <div class="right_info">
+            <img src="{% static 'src/folder.png' %}" alt="">
+        </div>
+    </div>
+    <div class="block_to_info">
+        <div class="blocks"><img src="{% static 'src/5.png' %}" class='blocks_image' alt=""><div class="blocks_title">Privacy</div><div class="blocks_information">We're built to provide true privacy by properly applying end-to-end encryption.</div></div>
+        <div class="blocks"><img src="{% static 'src/6.png' %}" class='blocks_image' alt=""><div class="blocks_title">Security</div><div class="blocks_information">We are carefully designed to provide the highest level of security for users.</div></div>
+        <div class="blocks"><img src="{% static 'src/7.png' %}" class='blocks_image' alt=""><div class="blocks_title">Transparency</div><div class="blocks_information">The client applications are open. Their cryptographic architecture is detailed.</div></div>
+        <div class="blocks"><img src="{% static 'src/8.png' %}" class='blocks_image' alt=""><div class="blocks_title">Reliability</div><div class="blocks_information">We directly own and manage our redundant server infrastructure.</div></div>
+    </div>
+    <div class="object_1">
+        <div class="tac_title">Our reviews speak for themselves</div>
+        <div class="min_tac_title">Millions of users choose Us. We provide the best conditions for<br> comfortable work. That's why they choose Us:</div>
+    <div class="grid" style='margin-top:70px;'>
+        <div class="com">
+        <img src="{% static 'src/#2.png' %}" alt=""></div>
+        <div class="com">
+        <img src="{% static 'src/#1.png' %}" alt=""></div>
+        <div class="com">
+        <img src="{% static 'src/#3.png' %}" alt=""></div>
+    </div>
+    </div>
+
+</div>
+<div class="footer"></div>
+</body>
+</html>

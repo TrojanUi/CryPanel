@@ -16,6 +16,7 @@ body{
 .container{
     width: 70%;
 margin: auto auto;
+text-align: center;
 }
 .logo{
     font-family: 'Manrope';
@@ -172,4 +173,106 @@ opacity: 0.55;
     height: 80px;
     margin-top: 150px;
     background: #2174FE;
+}
+.tac_title{
+font-family: 'Manrope';
+font-style: normal;
+font-weight: 800;
+font-size: 48px;
+line-height: 143.6%;
+color: #474747;
+margin-top: 75px;
+}
+.min_tac_title{
+    font-family: 'Manrope';
+font-style: normal;
+font-weight: 700;
+font-size: 27px;
+line-height: 143.6%;
+margin-top: 20px;
+color: #474747;
+opacity: 0.7;
+}
+.reg_btn{
+    margin-top: 40px;
+    background: #2174FE;
+border-radius: 12px;
+width: 194px;
+height: 59px;
+border: none;
+font-family: 'Manrope';
+font-style: normal;
+font-weight: 700;
+font-size: 18px;
+line-height: 143.6%;
+color: #F7F9FB;
+margin-left: auto;
+margin-right: auto;
+}
+.object_1{
+    text-align: center;
+}
+.ilus{
+    margin: auto;
+margin-top: 67px;
+}
+.container_two{
+    background-color: white;
+    padding: 100px 298px;
+}
+.flex{
+    display: flex;
+}
+
+#tag{
+    font-family: 'Manrope';
+font-style: normal;
+font-weight: 600;
+font-size: 24px;
+line-height: 143.6%;
+color: #474747;
+opacity: 0.5;
+}
+#left_info_title{
+    font-family: 'Manrope';
+font-style: normal;
+font-weight: 800;
+font-size: 48px;
+line-height: 129.1%;
+/* or 62px */
+
+
+color: #474747;
+
+}
+#left_info_info{
+    font-family: 'Manrope';
+font-style: normal;
+font-weight: 700;
+font-size: 24px;
+line-height: 143.6%;
+color: #474747;
+opacity: 0.7;
+margin-top: 12px;
+}
+#left_info_btn{
+    background: #2174FE;
+border-radius: 12px;
+width: 194px;
+height: 59px;
+border: none;
+font-family: 'Manrope';
+font-style: normal;
+font-weight: 700;
+font-size: 18px;
+line-height: 143.6%;
+text-align: center;
+color: #F7F9FB;
+margin-top: 34px;
+}
+.left_info{
+    text-align: left;
+}
+.right_info{
+    margin-left: 250px;
 }
