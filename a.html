@@ -1,0 +1,74 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration</title>
+    <link rel="stylesheet" href="{% static 'src/navbar.css' %}">
+    <link rel="stylesheet" href="{% static 'src/auth.css' %}">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+</head>
+<body>
+    <div class="navbar">
+        <div class="fdffdfdfd"></div>
+        <div class="navitem">
+        <img src="{% static 'src/img/logo.png' %}" class='logo_img' alt=""><div class='nav_title'>PLACE2COP</div>
+    </div>
+    </div>
+    <div class="sign_block">
+
+    <form method="POST">
+        {% csrf_token %}
+        <div class="reg">Registration</div>
+        <label for="rega">Login</label>
+        <input type="text" name="login" id='rega' required>
+        <label for="password">Password</label>
+        <input type="text" id='password' name="password" required>
+        <label for="capcha">Enter captcha</label>
+        <input id='capcha' class="xab_captcha" placeholder=""/>
+        <button class='btn_reg'type="submit">Registration</button>
+        {{error}}
+    </form>
+<div class="selectme_forcss"><br><img id="img_xabcapt" src="https://api.xab.su?api=get_img_captca"><br></div>
+    </div>
+    <div class="already">Already have account? <b><a href="{% url 'login' %}" style="color:#0047FF;">Log in</a></b></div>
+<script>
+    var rnd=Math.random();
+var form=$('input.xab_captcha').parents('form').first();
+
+function validate_xCap(form){
+	var url='https://api.tee.su?check=true&rnd='+rnd+'&val='+$('input.xab_captcha').val();
+	$.get(url, function(data){
+  		if(data==1){
+  			$('i#xProp').remove();
+  			$('input.xab_captcha').css('background','#eaffea');
+  			$('input.xab_captcha').css('font-weight','bold');
+  			$('input.xab_captcha').css('color','green');
+  			setTimeout("form.submit()", 1200);
+		}else{
+			alert('You entered an invalid captcha!');
+			$('input.xab_captcha').focus();
+		}
+	});
+}
+
+$('input.xab_captcha').before('<div class="selectme_forcss"><img id="img_xabcapt" src="https://api.tee.su?api=get_img_captca&rnd='+rnd+'&hn='+location.hostname
++'"><i hidden style="display:none !important" data-xpr="live" id="xProp"></i></div>');
+
+form.submit(function(e){
+	validate_xCap(form);
+	var xpr=$('i#xProp').attr('data-xpr');
+	if(xpr=='live'){
+		e.preventDefault()
+		return false;
+	}else{
+		return true;
+	}
+});
+</script>
+
+</body>
+</html>
