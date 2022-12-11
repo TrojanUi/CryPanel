@@ -192,14 +192,6 @@ class Domain(models.Model):
             return {"status": False, "message": res['errors'][0]['message']}                
 
 
-class Link(models.Model):
-    user = models.ForeignKey(User, on_delete=models.DO_NOTHING)
-    domain = models.ForeignKey(Domain, on_delete=models.DO_NOTHING)
-    path = models.TextField(default='/')
-    design = models.TextField(default='Set design')
-    created_at = models.DateTimeField("created_at", default=timezone.now)
-
-
 class Design(models.Model):
     TYPE_CHOICES = (
         ('LOCO', 'LOCO'),
@@ -209,3 +201,13 @@ class Design(models.Model):
     img = models.ImageField(upload_to='static/img/designs')
     type = models.TextField(choices=TYPE_CHOICES)
     created_at = models.DateTimeField("created_at", default=timezone.now)
+
+
+class Link(models.Model):
+    user = models.ForeignKey(User, on_delete=models.DO_NOTHING)
+    domain = models.ForeignKey(Domain, on_delete=models.DO_NOTHING)
+    path = models.TextField(default='/')
+    design = models.ForeignKey(Design, on_delete=models.DO_NOTHING)
+    created_at = models.DateTimeField("created_at", default=timezone.now)
+
+
