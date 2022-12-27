@@ -51,6 +51,7 @@ class loginView(View):
         data = req.POST
         username = data['username']
         password = data['password']
+        print(username)
         user = authenticate(req, username=username, password=password) 
         if user:
             login(req, user)
