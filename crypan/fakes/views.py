@@ -1,26 +1,21 @@
-from base64 import b64encode
+import sys
 from django.http import HttpResponse, JsonResponse
 from django.shortcuts import render
-from django.apps import apps
 from django.views.decorators.csrf import csrf_exempt
-from requests import request
-
-User = apps.get_model('main', 'User')
-Link = apps.get_model('main', 'Link')
-Domain = apps.get_model('main', 'Domain')
-Design = apps.get_model('main', 'Design')
+from django.http import HttpRequest
+from main.models import Design, Domain, Link, User
 
 
 
-def route_all(req, path):
-    domain = req.get_host()
-    path = '/' + path
-    link = Link.objects.filter(promo=path, domain=domain).first()
+
+def route_all(request: HttpRequest, exception):
+    domain = request.get_host()
+    link = Link.objects.filter(path=request.path, domain__name=domain).first() 
     if link:
-        req.session['domain'] = domain
-        req.session['path'] = path
-        design = Design.objects.filter(name=link.design).first()
-        return HttpResponse(design.html)
+        request.session['domain'] = domain
+        request.session['path'] = request.path
+        return HttpResponse(link.design.name)
     else:
-        return HttpResponse("Cannot get: /" + path)
+        return HttpResponse("Cannot get: " + request.path)
+
 

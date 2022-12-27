@@ -1,0 +1,17 @@
+[26/Dec/2022 00:26:07] ERROR [django.request:224] Internal Server Error: /login
+[26/Dec/2022 00:26:07] ERROR [django.server:161] "GET /login HTTP/1.1" 500 145
+[26/Dec/2022 00:30:12] ERROR [django.server:161] "GET /login HTTP/1.1" 500 59
+[26/Dec/2022 00:30:12] ERROR [django.server:161] "GET /login HTTP/1.1" 500 59
+[26/Dec/2022 00:30:18] ERROR [django.server:161] "GET /login HTTP/1.1" 500 59
+[26/Dec/2022 00:35:22] ERROR [django.server:161] "GET /login HTTP/1.1" 500 59
+[26/Dec/2022 00:35:34] ERROR [django.server:161] "GET /login HTTP/1.1" 500 59
+[26/Dec/2022 00:38:14] ERROR [django.server:161] "GET /login HTTP/1.1" 500 59
+[26/Dec/2022 00:40:24] ERROR [django.server:161] "GET /login HTTP/1.1" 500 59
+[26/Dec/2022 00:40:39] ERROR [django.server:161] "GET /login HTTP/1.1" 500 59
+[26/Dec/2022 00:40:54] ERROR [django.server:161] "GET /login HTTP/1.1" 500 59
+[26/Dec/2022 00:42:13] ERROR [django.server:161] "GET / HTTP/1.1" 500 59
+[26/Dec/2022 00:49:07] ERROR [django.server:161] "GET /admin/ HTTP/1.1" 500 59
+[26/Dec/2022 00:55:05] ERROR [django.server:161] "GET / HTTP/1.1" 500 59
+[26/Dec/2022 00:55:17] ERROR [django.server:161] "GET / HTTP/1.1" 500 59
+[26/Dec/2022 00:56:06] ERROR [django.server:161] "GET / HTTP/1.1" 500 59
+[26/Dec/2022 00:56:30] ERROR [django.server:161] "GET / HTTP/1.1" 500 59

@@ -11,9 +11,13 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-x5qnc)i-@gb(-il5d@sbtbd&9s3ha4v5_a$16znk3p$r3%bja!'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
+DEBUG_PROPAGATE_EXCEPTIONS = True
+
 FAKES_IP = "159.223.174.144"
 ALLOWED_HOSTS = ['*']
+AUTH_USER_MODEL = 'main.User'
+ROOT_URLCONF = 'fakes.urls'
 
 LOGIN_URL = '/login'
 LOGIN_REDIRECT_URL = '/main'
@@ -31,6 +35,8 @@ INSTALLED_APPS = [
     'fakes'
 ]
 
+DBLOG_CATCH_500_ERRORS = True
+
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -41,7 +47,6 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = 'crypan.urls'
 
 TEMPLATES = [
     {
@@ -91,7 +96,40 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-AUTH_USER_MODEL = 'main.User'
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'formatters': {
+        'verbose': {
+            'format' : "[%(asctime)s] %(levelname)s [%(name)s:%(lineno)s] %(message)s",
+            'datefmt' : "%d/%b/%Y %H:%M:%S"
+        },
+        'simple': {
+            'format': '%(levelname)s %(message)s'
+        },
+    },
+    'handlers': {
+        'file': {
+            'level': 'ERROR',
+            'class': 'logging.FileHandler',
+            'filename': 'mysite.log',
+            'formatter': 'verbose'
+        },
+    },
+    'loggers': {
+        'django': {
+            'handlers':['file'],
+            'propagate': True,
+            'level':'DEBUG',
+        },
+        'fakes': {
+            'handlers': ['file'],
+            'level': 'ERROR',
+        },
+    }
+}
+
 # Internationalization
 # https://docs.djangoproject.com/en/4.0/topics/i18n/
 
