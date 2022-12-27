@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-(#fv&=2b+8md!-(nsww+5aby^ihv4h--co-lf3k(1new#0kbvn
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -37,9 +37,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'host'
+    'host.apps.HostConfig',
 ]
-
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -100,7 +99,7 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
+AUTH_USER_MODEL = 'host.absUser'
 # Internationalization
 # https://docs.djangoproject.com/en/4.0/topics/i18n/
 
